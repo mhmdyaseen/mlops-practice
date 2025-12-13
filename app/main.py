@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from google.cloud import storage
 import os
 
-# -------- CONFIG --------
+# -------- CONFIG -------
 BUCKET_NAME = "practice-mlops-oppe"
 MODEL_BLOB_PATH = "models/model.pkl"
 LOCAL_MODEL_PATH = "model.pkl"
