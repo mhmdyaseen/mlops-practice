@@ -1,0 +1,6 @@
+artifact_location: file:///home/jupyter/src/mlruns/151904498216058543
+creation_time: 1765628094318
+experiment_id: '151904498216058543'
+last_update_time: 1765628094318
+lifecycle_stage: active
+name: fraud_detection_gcs

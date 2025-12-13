@@ -1,0 +1,14 @@
+artifact_uri: file:///home/jupyter/src/mlruns/151904498216058543/cdc341e170154413858c8a6ce27237fb/artifacts
+end_time: 1765638753695
+entry_point_name: ''
+experiment_id: '151904498216058543'
+lifecycle_stage: active
+run_id: cdc341e170154413858c8a6ce27237fb
+run_name: clumsy-sow-396
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765638736375
+status: 3
+tags: []
+user_id: jupyter

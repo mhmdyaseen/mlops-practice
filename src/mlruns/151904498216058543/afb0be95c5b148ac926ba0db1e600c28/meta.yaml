@@ -1,0 +1,14 @@
+artifact_uri: file:///home/jupyter/src/mlruns/151904498216058543/afb0be95c5b148ac926ba0db1e600c28/artifacts
+end_time: 1765628934223
+entry_point_name: ''
+experiment_id: '151904498216058543'
+lifecycle_stage: active
+run_id: afb0be95c5b148ac926ba0db1e600c28
+run_name: kindly-mare-153
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765628918991
+status: 3
+tags: []
+user_id: jupyter

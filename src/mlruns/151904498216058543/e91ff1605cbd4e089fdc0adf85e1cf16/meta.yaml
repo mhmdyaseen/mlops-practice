@@ -1,0 +1,14 @@
+artifact_uri: file:///home/jupyter/src/mlruns/151904498216058543/e91ff1605cbd4e089fdc0adf85e1cf16/artifacts
+end_time: 1765628113170
+entry_point_name: ''
+experiment_id: '151904498216058543'
+lifecycle_stage: active
+run_id: e91ff1605cbd4e089fdc0adf85e1cf16
+run_name: peaceful-seal-139
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765628094836
+status: 3
+tags: []
+user_id: jupyter
