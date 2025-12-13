@@ -29,7 +29,7 @@ jobs:
 
     - name: Authenticate to GCP
       env:
-        GCP_B64: ${{ secrets.GCP_CREDENTIALS_B64 }}
+        GCP_B64: ${{ secrets.GCP_B64 }}
       run: |
         echo "$GCP_B64" | base64 -d > gcp-key.json
         gcloud auth activate-service-account --key-file=gcp-key.json
