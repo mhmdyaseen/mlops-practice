@@ -49,10 +49,10 @@ jobs:
 
     - name: Setup CML
       uses: iterative/setup-cml@v2
-      env:
-        REPO_TOKEN: ${{ secrets.CML_REPO_TOKEN }}
-
+    
     - name: Report build via CML
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         echo "## 🚀 Fraud Detection API Build" > report.md
         echo "- Image pushed successfully" >> report.md
