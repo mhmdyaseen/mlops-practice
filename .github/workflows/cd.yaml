@@ -1,0 +1,61 @@
+name: Build and Push Fraud Detection API
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  PROJECT_ID: super50-19f07
+  REGION: us-central1
+  REPOSITORY: oppe-practice
+  IMAGE_NAME: oppe-practice-docker
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+
+    - name: Authenticate to GCP
+      env:
+        GCP_B64: ${{ secrets.GCP_CREDENTIALS_B64 }}
+      run: |
+        echo "$GCP_B64" | base64 -d > gcp-key.json
+        gcloud auth activate-service-account --key-file=gcp-key.json
+        gcloud config set project $PROJECT_ID
+
+    - name: Configure Docker for Artifact Registry
+      run: |
+        gcloud auth configure-docker $REGION-docker.pkg.dev
+
+    - name: Build Docker image
+      run: |
+        docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:${{ github.sha }} .
+
+    - name: Push Docker image
+      run: |
+        docker push $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:${{ github.sha }}
+
+    - name: Setup CML
+      uses: iterative/setup-cml@v2
+      env:
+        REPO_TOKEN: ${{ secrets.CML_REPO_TOKEN }}
+
+    - name: Report build via CML
+      run: |
+        echo "## 🚀 Fraud Detection API Build" > report.md
+        echo "- Image pushed successfully" >> report.md
+        echo "- Image tag: \`${{ github.sha }}\`" >> report.md
+        cml comment create report.md
+
