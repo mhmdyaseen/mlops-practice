@@ -29,9 +29,9 @@ jobs:
 
     - name: Authenticate to GCP
       env:
-        GCP_B64: ${{ secrets.GCP_B64 }}
+        GCP_SA_JSON: ${{ secrets.GCP_SA_JSON }}
       run: |
-        echo "$GCP_B64" | base64 -d > gcp-key.json
+        printf '%s' "$GCP_SA_JSON" > gcp-key.json
         gcloud auth activate-service-account --key-file=gcp-key.json
         gcloud config set project $PROJECT_ID
 
