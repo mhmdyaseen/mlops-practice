@@ -4,6 +4,8 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from google.cloud import storage
 import os
+from opentelemetry import trace
+from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 
 # -------- CONFIG -------
 BUCKET_NAME = "practice-mlops-oppe"
@@ -12,6 +14,8 @@ LOCAL_MODEL_PATH = "model.pkl"
 
 # -------- FASTAPI APP --------
 app = FastAPI(title="Fraud Detection API")
+FastAPIInstrumentor.instrument_app(app)
+tracer = trace.get_tracer(__name__)
 
 model = None
 
@@ -72,8 +76,11 @@ def predict(transaction: Transaction):
 
     data = pd.DataFrame([transaction.dict()])
 
-    probability = model.predict_proba(data)[0][1]
+    with tracer.start_as_current_span("model_inference"):
+        probability = model.predict_proba(data)[0][1]
+
     prediction = int(probability >= 0.5)
+
 
     return {
         "prediction": prediction,
